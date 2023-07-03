@@ -54,12 +54,69 @@ public class Program
 
         // Run metric functions here
         try
-        {
+        {   // set the namespace - there is no default and without namespace the metrics can be
+            // allocated to the wrong area on accident
+            var selectedNamespace = await SelectNamespace();
+            
 
         }
         catch (Exception ex) { logger.LogError(ex, "There was a problem executing the scenario."); }
     }
 
+    private static async Task CreateDashboard()
+    {
+        Console.WriteLine("Creating Dashboard...");
+        var dashboardName = _configuration["dashboardName"];
+        var newDashboard = new DashboardModel();
+        //TODO - update new dashboard info here
+        // Add a new metric to the dashboard.
+        newDashboard.Widgets.Add(new Widget
+        {
+            Height = 8,
+            Width = 8,
+            Y = 8,
+            X = 0,
+            Type = "metric",
+            Properties = new Properties
+            {
+                Metrics = new List<List<object>>
+                    { //todo
+                      },
+                View = "timeSeries",
+                Region = _configuration["region"],
+                Stat = "Sum",
+                Period = 86400,
+                YAxis = new YAxis { Left = new Left { Min = 0, Max = 100 } },
+                Title = "Custom Metric Widget",
+                LiveData = true,
+                Sparkline = true,
+                Trend = true,
+                Stacked = false,
+                SetPeriodToTimeRange = false
+            }
+        });
+
+        var newDashboardString = JsonSerializer.Serialize(newDashboard,
+            new JsonSerializerOptions
+            { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+        var validationMessages =
+            await _cloudWatchWrapper.PutDashboard(dashboardName, newDashboardString);
+    }
 
 
+    private static async Task<string> SelectNamespace()
+    {
+        Console.WriteLine(new string('-', 80));
+        Console.WriteLine($"CloudWatch Namespace");
+        var metrics = await _cloudWatchWrapper.ListMetrics();
+        // namespace = targeted dashboard??
+        var selectedNamespace = _configuration["dashboardName"];
+
+        Console.WriteLine(new string('-', 80));
+
+        return selectedNamespace;
+    }
+
+
+    
 }
