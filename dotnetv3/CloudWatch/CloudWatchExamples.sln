@@ -15,6 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudWatchScenario", "Scena
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudWatchTests", "Tests\CloudWatchTests.csproj", "{F7DF95C8-F0D7-483C-9653-BEF71ACE61B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AWS_Metric_Retrieval", "AWS_Metric_Retrieval", "{2CCB14B2-5239-4811-9A40-99071EAFD2E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{3D090E05-CADF-4528-9ACC-736B0BD76222}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2CDED30-54AF-4AE6-8AC1-5FB15A4F1264} = {B2CDED30-54AF-4AE6-8AC1-5FB15A4F1264}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +40,10 @@ Global
 		{F7DF95C8-F0D7-483C-9653-BEF71ACE61B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7DF95C8-F0D7-483C-9653-BEF71ACE61B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7DF95C8-F0D7-483C-9653-BEF71ACE61B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D090E05-CADF-4528-9ACC-736B0BD76222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D090E05-CADF-4528-9ACC-736B0BD76222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D090E05-CADF-4528-9ACC-736B0BD76222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D090E05-CADF-4528-9ACC-736B0BD76222}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +52,7 @@ Global
 		{F019ADD9-E2BA-4670-963C-EF778E97E8CF} = {7907FB6A-1353-4735-95DC-EEC5DF8C0649}
 		{B2CDED30-54AF-4AE6-8AC1-5FB15A4F1264} = {B987097B-189C-4D0B-99BC-E67CD705BCA0}
 		{F7DF95C8-F0D7-483C-9653-BEF71ACE61B5} = {5455D423-2AFC-4BC6-B79D-9DC4270D8F7D}
+		{3D090E05-CADF-4528-9ACC-736B0BD76222} = {2CCB14B2-5239-4811-9A40-99071EAFD2E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {870D888D-5C8B-4057-8722-F73ECF38E513}
