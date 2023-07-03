@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Amazon.CloudWatch;
 using Amazon.CloudWatch.Model;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace CloudWatchActions;
 
@@ -31,6 +32,8 @@ public static class HelloCloudWatch
         });
         Console.WriteLine($"Hello Amazon CloudWatch! Following are some metrics available in the {metricNamespace} namespace:");
         Console.WriteLine();
+
+       
         foreach (var metric in response.Metrics.Take(5))
         {
             Console.WriteLine($"\tMetric: {metric.MetricName}");

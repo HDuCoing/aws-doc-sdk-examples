@@ -27,15 +27,15 @@
         "properties": {
           "metrics": [
             [
-              "AWS/Billing",
+              "AWS/EC2",
               "EstimatedCharges",
               "Currency",
-              "USD",
-              { "region": "us-east-1" }
+              "NZD",
+              { "region": "ap-southeast-2a" }
             ]
           ],
           "view": "timeSeries",
-          "region": "us-east-1",
+          "region": "ap-southeast-2a",: null,
           "stat": "Maximum",
           "period": 86400,
           "yAxis": {
@@ -74,7 +74,7 @@
             }
           },
           "stacked": false,
-          "region": "us-east-1",
+          "region": "ap-southeast-2a",
           "stat": "Sum",
           "period": 300,
           "title": "CloudWatch Usage",

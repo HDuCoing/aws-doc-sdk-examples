@@ -1,23 +1,13 @@
 ﻿{
-  "dashboardName": "example-new-dashboard",
+  "dashboardName": "Metrics-DEV",
   "exampleAlarmName": "example-metric-alarm",
-  "accountId": "1234567890",
-  "region": "us-east-1",
+  "accountId": "427510574968",
+  "region": "ap-southeast-2",
   "emailTopic": "Default_CloudWatch_Alarms_Topic",
   "customMetricNamespace": "example-namespace",
   "customMetricName": "example-custom-metric",
   "dashboardExampleBody": {
     "widgets": [
-      {
-        "height": 6,
-        "width": 6,
-        "y": 0,
-        "x": 0,
-        "type": "text",
-        "properties": {
-          "markdown": "# Code Example Dashboard \nThis dashboard was created by example code.\n"
-        }
-      },
       {
         "height": 8,
         "width": 8,
@@ -30,12 +20,12 @@
               "AWS/Billing",
               "EstimatedCharges",
               "Currency",
-              "USD",
-              { "region": "us-east-1" }
+              "NZD",
+              { "region": "ap-southeast-2" }
             ]
           ],
           "view": "timeSeries",
-          "region": "us-east-1",
+          "region": "ap-southeast-2",
           "stat": "Maximum",
           "period": 86400,
           "yAxis": {
@@ -74,7 +64,7 @@
             }
           },
           "stacked": false,
-          "region": "us-east-1",
+          "region": "ap-southeast-2",
           "stat": "Sum",
           "period": 300,
           "title": "CloudWatch Usage",
