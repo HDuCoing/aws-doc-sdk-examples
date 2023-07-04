@@ -1,6 +1,65 @@
 {
-  "dashboardName": "Metrics-DEV",
-  "exampleAlarmName": "example-metric-alarm",
-  "accountId": "427510574968",
-  "region": "ap-southeast-2"
+  "dashboardName": "DASHBOARD",
+  "accountId": "ACCOUNTID",
+  "region": "REGION",
+  "InstanceTypes": [
+    {
+      "InstanceType": "INSTANCETYPE",
+      "CurrentGeneration": true,
+      "FreeTierEligible": true,
+      "SupportedUsageClasses": [
+        "on-demand",
+        "spot"
+      ],
+      "SupportedRootDeviceTypes": [
+        "ebs"
+      ],
+      "BareMetal": false,
+      "Hypervisor": "xen",
+      "ProcessorInfo": {
+        "SupportedArchitectures": [
+          "i386",
+          "x86_64"
+        ],
+        "SustainedClockSpeedInGhz": 2.5
+      },
+      "VCpuInfo": {
+        "DefaultVCpus": 1,
+        "DefaultCores": 1,
+        "DefaultThreadsPerCore": 1,
+        "ValidCores": [
+          1
+        ],
+        "ValidThreadsPerCore": [
+          1
+        ]
+      },
+      "MemoryInfo": {
+        "SizeInMiB": 1024
+      },
+      "InstanceStorageSupported": false,
+      "EbsInfo": {
+        "EbsOptimizedSupport": "unsupported",
+        "EncryptionSupport": "supported"
+      },
+      "NetworkInfo": {
+        "NetworkPerformance": "Low to Moderate",
+        "MaximumNetworkInterfaces": 2,
+        "Ipv4AddressesPerInterface": 2,
+        "Ipv6AddressesPerInterface": 2,
+        "Ipv6Supported": true,
+        "EnaSupport": "unsupported"
+      },
+      "PlacementGroupInfo": {
+        "SupportedStrategies": [
+          "partition",
+          "spread"
+        ]
+      },
+      "HibernationSupported": false,
+      "BurstablePerformanceSupported": true,
+      "DedicatedHostsSupported": false,
+      "AutoRecoverySupported": true
+    }
+  ]
 }
