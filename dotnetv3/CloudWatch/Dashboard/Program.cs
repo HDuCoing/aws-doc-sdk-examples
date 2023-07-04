@@ -19,7 +19,7 @@ using Dashboard;
 namespace Program;
 public class Program
 {
-
+    private readonly IAmazonCloudWatch _amazonCloudWatch;
     private static ILogger logger = null!;
     private static CloudWatchWrapper _cloudWatchWrapper = null!;
     private static IConfiguration _configuration = null!;
@@ -77,20 +77,22 @@ public class Program
         Console.WriteLine("Creating Dashboard...");
         var dashboardName = _configuration["dashboardName"];
         var newDashboard = new DashboardModel();
-        // Cloudwatch statistics
-        var client = new AmazonCloudWatchClient();
+        /* // Cloudwatch statistics
+         var client = new AmazonCloudWatchClient();
 
-        var dimension = new Dimension
-        {
-            Name = dashboardName,
-            Value = "Virtual Machine Metric",
-            Namespace
-        };
+         var listmetrics = new GetMetricDataRequest{};
+         var data = client.GetMetricDataAsync(listmetrics);*/
 
-        
+        var metricdata = await _cloudWatchWrapper.GetMetricData(minutesOfData:20,
+                                                                useDescendingTime:true,
+                                                                endDateUtc: DateTime.UtcNow.AddMinutes(1),
+                                                                maxDataPoints:20,
+                                                                dataQueries:null);
+
         //,new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }
-        var newDashboardString = System.Text.Json.JsonSerializer.Serialize(newDashboard);
+        var newDashboardString = System.Text.Json.JsonSerializer.Serialize(metricdata);
         await _cloudWatchWrapper.PutDashboard(dashboardName, newDashboardString);
+        
     }
 
     // Optionally cleans up the dashboard by deleting it
@@ -135,11 +137,6 @@ public class Program
         return response;
     }
 
-    private static async Task ProvideMetrics()
-    {
-        var client = new AmazonEC2Client();
-
-    }
     // Convert settings.json to jsonobject to update the values with the needed information.
     private static void UpdateJson(string region, string dashboard, string accountid, string instancetype)
     {
@@ -155,4 +152,6 @@ public class Program
 
         File.WriteAllText("settings.json", output);
     }
+    
+   
 }
