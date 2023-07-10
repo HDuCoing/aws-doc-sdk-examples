@@ -72,19 +72,27 @@ public class CloudWatchWrapper
     public async Task<List<Datapoint>> GetMetricStatistics(string metricNamespace,
         string metricName, List<string> statistics, List<Dimension> dimensions, int days, int period)
     {
-        var metricStatistics = await _amazonCloudWatch.GetMetricStatisticsAsync(
-            new GetMetricStatisticsRequest()
-            {
-                Namespace = metricNamespace,
-                MetricName = metricName,
-                Dimensions = dimensions,
-                Statistics = statistics,
-                StartTimeUtc = DateTime.UtcNow.AddDays(-days),
-                EndTimeUtc = DateTime.UtcNow,
-                Period = period
-            });
+        var results = new List<Datapoint>();
+        foreach (var offset in Enumerable.Range(0, days).Reverse())
+        {
+            var metricStatistics = await _amazonCloudWatch.GetMetricStatisticsAsync(
+                new GetMetricStatisticsRequest()
+                {
+                    Namespace = metricNamespace,
+                    MetricName = metricName,
+                    Dimensions = dimensions,
+                    Statistics = statistics,
+                    //ExtendedStatistics = new List<string> { "p90" },
+                    StartTimeUtc = DateTime.UtcNow.AddDays(-(offset + 1)),
+                    EndTimeUtc = DateTime.UtcNow.AddDays(-offset),
+                    Period = period
+                }
+            );
+            Console.WriteLine(metricStatistics.Datapoints);
+            results.AddRange(metricStatistics.Datapoints);
+        }
 
-        return metricStatistics.Datapoints;
+        return results;
     }
     // snippet-end:[CloudWatch.dotnetv3.GetMetricStatistics]
 
@@ -248,7 +256,7 @@ public class CloudWatchWrapper
             {
                 StartTimeUtc = startTimeUtc,
                 EndTimeUtc = endDateUtc.Value,
-                LabelOptions = new LabelOptions { Timezone = timeZoneString },
+                LabelOptions = new LabelOptions { },//todo timezone?
                 ScanBy = useDescendingTime ? ScanBy.TimestampDescending : ScanBy.TimestampAscending,
                 MaxDatapoints = maxDataPoints,
                 MetricDataQueries = dataQueries,
@@ -256,10 +264,13 @@ public class CloudWatchWrapper
 
         await foreach (var data in paginatedMetricData.MetricDataResults)
         {
+
             metricData.Add(data);
         }
         return metricData;
     }
+
+
     // snippet-end:[CloudWatch.dotnetv3.GetMetricData]
 
     // snippet-start:[CloudWatch.dotnetv3.PutMetricAlarm]

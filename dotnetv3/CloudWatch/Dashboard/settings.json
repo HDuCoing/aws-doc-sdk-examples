@@ -2,6 +2,42 @@
   "dashboardName": "DASHBOARD",
   "accountId": "ACCOUNTID",
   "region": "REGION",
+  "dashboardBody": {
+    "widgets": [
+      {
+        "height": 8,
+        "width": 8,
+        "y": 0,
+        "x": 14,
+        "type": "metric",
+        "properties": {
+          "metrics": [
+            [ "AWS/EC2", "CPUUtilization", "Type", "API", "Resource", "ListMetrics", "Service", "CloudWatch", "Class", "None" ],
+            [ "...", "GetMetricStatistics", ".", ".", ".", "." ],
+            [ "...", "GetMetricData", ".", ".", ".", "." ],
+            [ "...", "PutDashboard", ".", ".", ".", "." ],
+            [ "...", "PutMetricData", ".", ".", ".", "." ]
+          ],
+          "view": "timeSeries",
+          "yAxis": {
+            "left": {
+              "min": 0,
+              "max": 200
+            }
+          },
+          "stacked": false,
+          "region": "ap-southeast-2",
+          "stat": "Sum",
+          "period": 300,
+          "title": "Metrics",
+          "setPeriodToTimeRange": false,
+          "liveData": true,
+          "sparkline": true,
+          "trend": true
+        }
+      }
+    ]
+  },
   "InstanceTypes": [
     {
       "InstanceType": "INSTANCETYPE",
